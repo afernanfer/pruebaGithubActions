@@ -1,11 +1,12 @@
-name: Hola Mundo Workflow
-on:
- push:
-  branches:
-    - main
+name: Simple Contexts Example
+on: push
 jobs:
- hola-mundo:
+ print-info:
   runs-on: ubuntu-latest
   steps:
-    - name: Print greeting
-      run: echo "Hola Mundo!"
+   - name: Set custom environment variable
+     run: echo "CUSTOM_VARIABLE=Hello, World!" >> $GITHUB_ENV
+   - name: Print commit author and custom environment variable
+     run: |
+      echo "Commit author: ${{ github.actor }}"
+      echo "Custom variable: ${{ env.CUSTOM_VARIABLE }}"
